@@ -9,12 +9,8 @@ public class StreamCell : MonoBehaviour {
 	public float startPlayFall;
 	float playFallTime;
 	public float life = 1.0f;
+	public float effectiveLifeLossAtHalfLife = 1.0f; // only starts decreasing when Poo life reaches 50%
 	float decreaseSec = 0.1f;
-		Vector3 hitPosition;
-
-	public void setTouchPosition(Vector3 pos){
-				this.hitPosition = pos;
-	}
 
 	// Use this for initialization
 	void Start () {
@@ -47,13 +43,22 @@ public class StreamCell : MonoBehaviour {
 				this.GetComponentInChildren<BoxCollider2D>().enabled = true;
 			}
 		}
+		float decreasedLife = decreaseSec*Time.deltaTime;
+		life -= decreasedLife;
 
-		life -= decreaseSec*Time.deltaTime;
-
+	/*	if(life >= 0.0f && gameObject.GetComponent<SpriteRenderer>().sprite == poo)
+			gameObject.GetComponent<SpriteRenderer>().color = new Color (1f, 1f, 1f, life + 0.4f);
+			*/
+		if (life >= 0.0f && life <= 0.5f && gameObject.GetComponent<SpriteRenderer> ().sprite == poo) {
+			effectiveLifeLossAtHalfLife -= decreasedLife;
+			float newScale = (effectiveLifeLossAtHalfLife * 0.2f);
+			transform.localScale = new Vector3 (newScale, newScale, newScale);
+		}
 	}
 
 	public void destroyThis(){
 		fallAnimation = true;
+		gameObject.GetComponent<SpriteRenderer>().color = new Color (1f, 1f, 1f, life + 0.75f);
 
 		if (life > 0.0f)
 		life = 0.0f;
@@ -70,8 +75,8 @@ public class StreamCell : MonoBehaviour {
 	            gameObject.GetComponent<ParticleSystem>().Play();
 	        }	
 
-	        ProgressBarPoo pb = this.GetComponentInParent<ProgressBarPoo>();
-						pb.startBar(hitPosition);
+	 //       ProgressBarPoo pb = this.GetComponentInParent<ProgressBarPoo>();
+	//		pb.startBar();
     	}
 	}
 

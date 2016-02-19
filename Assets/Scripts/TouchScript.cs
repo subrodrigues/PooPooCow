@@ -283,7 +283,6 @@ public class TouchScript : MonoBehaviour {
 						pooRate++;
 
 						cells[index].touch = (StreamCell)Instantiate (touch, target, transform.rotation);
-						cells [index].touch.setTouchPosition (hit.point);
 						pooShooter.shoot(cells[index].touch);
 
 						// updateScore();
