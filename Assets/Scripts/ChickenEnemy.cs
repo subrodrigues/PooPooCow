@@ -8,7 +8,6 @@ public class ChickenEnemy : MonoBehaviour {
 	public float damage = 1.0f;
 	public Transform player;
 
-	
 	bool playDeathAnimation = false;
 	public float startPlayDeath;
 	float playDeathTime;

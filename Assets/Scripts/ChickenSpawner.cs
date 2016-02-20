@@ -4,8 +4,8 @@ using System.Collections;
 public class ChickenSpawner : MonoBehaviour {
 	float lastEnemy;
 	float spawnRate; // In seconds
-	public ChickenEnemy enemy;
-	public ChickenEnemyReverse enemyRev;
+	public ChickenEnemy enemy, superEnemy;
+	public ChickenEnemyReverse enemyRev, superEnemyRev;
 	public Transform target;
 	public bool reverse = false;
 	
@@ -34,19 +34,29 @@ public class ChickenSpawner : MonoBehaviour {
 				float topSpawn = Random.value;
 				if(topSpawn >= 0.5f){
 					if (reverse){
-						Instantiate (enemyRev, new Vector3(transform.position.x, transform.position.y - threshold, transform.position.z), transform.rotation);
+						if(Random.value <= 0.2f)
+							Instantiate (superEnemyRev, new Vector3(transform.position.x, transform.position.y - threshold, transform.position.z), transform.rotation);
+						else
+							Instantiate (enemyRev, new Vector3(transform.position.x, transform.position.y - threshold, transform.position.z), transform.rotation);
 					}
 					else{
-						Instantiate (enemy, new Vector3(transform.position.x, transform.position.y - threshold, transform.position.z), transform.rotation);
+						if(Random.value <= 0.2f)
+							Instantiate (superEnemy, new Vector3(transform.position.x, transform.position.y - threshold, transform.position.z), transform.rotation);
+						else
+							Instantiate (enemy, new Vector3(transform.position.x, transform.position.y - threshold, transform.position.z), transform.rotation);
 					}
 				}
 				else {
 					if(reverse){
-						Instantiate (enemyRev, new Vector3(transform.position.x, transform.position.y + threshold, transform.position.z), transform.rotation);
-					}
+						if(Random.value <= 0.2f)
+							Instantiate (superEnemyRev, new Vector3(transform.position.x, transform.position.y + threshold, transform.position.z), transform.rotation);
+						else
+							Instantiate (enemyRev, new Vector3(transform.position.x, transform.position.y + threshold, transform.position.z), transform.rotation);					}
 					else{
-						Instantiate (enemy, new Vector3(transform.position.x, transform.position.y + threshold, transform.position.z), transform.rotation);
-					}
+						if(Random.value <= 0.2f)
+							Instantiate (superEnemy, new Vector3(transform.position.x, transform.position.y + threshold, transform.position.z), transform.rotation);
+						else
+							Instantiate (enemy, new Vector3(transform.position.x, transform.position.y + threshold, transform.position.z), transform.rotation);					}
 				}
 			}
 		}

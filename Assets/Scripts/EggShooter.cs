@@ -10,6 +10,7 @@ public class EggShooter : MonoBehaviour {
 	public bool pooTime = false;
 	public GameObject eggBullet;
 	public bool reverse = false;
+	public bool superChicken;
 	public float currentTime;
 
 	void Awake ()
@@ -20,7 +21,12 @@ public class EggShooter : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		lastFired = Time.time;
-		shootRate = 2.0f + (Random.value * 3.0f); // In seconds
+
+		if(superChicken) // Bigger probability of eggs barrage at super chicken
+			shootRate = 1.0f + (Random.value * 2.0f); // In seconds
+		else
+			shootRate = 2.0f + (Random.value * 3.0f); // In seconds
+		
 		currentTime = Time.time;
 	}
 	
@@ -31,8 +37,12 @@ public class EggShooter : MonoBehaviour {
 			((!reverse && (transform.parent.gameObject).GetComponentInChildren<ChickenEnemy>().startPlayDeath == -1.0f) 
 				|| (reverse && (transform.parent.gameObject).GetComponentInChildren<ChickenEnemyReverse>().startPlayDeath == -1.0f) )) {
 			if (currentTime > (lastFired + shootRate)) {
-				lastFired = currentTime;
-				shootRate = 2.5f + (Random.value * 3.0f); 
+
+				if (!superChicken) {
+					lastFired = currentTime;
+					shootRate = 2.5f + (Random.value * 3.0f); 
+				}
+
 				Instantiate (eggBullet, transform.position, transform.rotation);
 			}
 		}
