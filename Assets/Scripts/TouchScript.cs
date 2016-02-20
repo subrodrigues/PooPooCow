@@ -39,7 +39,7 @@ public class TouchScript : MonoBehaviour
 	public Texture2D fullGaugeTex, fullGaugeBlockedTex;
 
 	public PooPooRateGauge pooPooRate;
-	public Sprite fullGauge, normalGauge;
+	public Sprite fullGauge, normalGauge, gauge2, gauge3, gauge4, gauge5, gauge6, gauge7, gauge8, gauge9;
 
 	void Awake ()
 	{
@@ -202,7 +202,7 @@ public class TouchScript : MonoBehaviour
 		if (!inflamedIntestines && currentRateTime >= 1.0f) { // removes 3 poo each second
 			currentRateTime = 0.0f;
 
-			pooRate -= 3; // incremented in update()
+			pooRate -= 2; // incremented in update() TODO: change to 3 again
 			if (pooRate < 0)
 				pooRate = 0;
 		}
@@ -211,21 +211,56 @@ public class TouchScript : MonoBehaviour
 			currentCooling = 0.0f;
 			inflamedIntestines = false;
 			pooRate = 0;
-			pooPooRate.GetComponent<SpriteRenderer>().sprite = normalGauge;
+	//		pooPooRate.GetComponent<SpriteRenderer>().sprite = normalGauge;
 		}
 
 		if (inflamedIntestines) {
 			currentCooling += Time.deltaTime;
 		}
+
 		if (pooRate >= MAXRATE) {
 			inflamedIntestines = true;			
-			pooPooRate.GetComponent<SpriteRenderer>().sprite = fullGauge;
+		//	pooPooRate.GetComponent<SpriteRenderer>().sprite = fullGauge;
 		}
 
 		currentRateTime += Time.deltaTime;
 		barDisplay = pooRate / MAXRATE;
 
-		pooPooRate.SetBarDisplay (1f + barDisplay/2);
+		if (barDisplay == 0f) {
+			pooPooRate.GetComponent<SpriteRenderer> ().sprite = normalGauge;
+		}
+		else if (barDisplay > 0f && barDisplay < 0.2f) {
+			pooPooRate.GetComponent<SpriteRenderer> ().sprite = gauge2;
+		}
+		else if (barDisplay > 0.2f && barDisplay < 0.3f) {
+			pooPooRate.GetComponent<SpriteRenderer> ().sprite = gauge3;
+		}
+		else if (barDisplay > 0.3f && barDisplay < 0.4f) {
+			pooPooRate.GetComponent<SpriteRenderer> ().sprite = gauge4;
+		}
+		else if (barDisplay > 0.3f && barDisplay < 0.4f) {
+			pooPooRate.GetComponent<SpriteRenderer> ().sprite = gauge4;
+		}
+		else if (barDisplay > 0.4f && barDisplay < 0.5f) {
+			pooPooRate.GetComponent<SpriteRenderer> ().sprite = gauge5;
+		}
+		else if (barDisplay > 0.5f && barDisplay < 0.6f) {
+			pooPooRate.GetComponent<SpriteRenderer> ().sprite = gauge6;
+		}
+		else if (barDisplay > 0.6f && barDisplay < 0.7f) {
+			pooPooRate.GetComponent<SpriteRenderer> ().sprite = gauge7;
+		}
+		else if (barDisplay > 0.7f && barDisplay < 0.8f) {
+			pooPooRate.GetComponent<SpriteRenderer> ().sprite = gauge8;
+		}
+		else if (barDisplay > 0.8f && barDisplay < 0.9f) {
+			pooPooRate.GetComponent<SpriteRenderer> ().sprite = gauge9;
+		}
+		else {
+			pooPooRate.GetComponent<SpriteRenderer> ().sprite = fullGauge;
+		}
+
+		pooPooRate.SetBarDisplay (1f + barDisplay/6);
 	}
 	/*
 	void OnGUI() {

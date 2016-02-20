@@ -21,7 +21,7 @@ public class PooPooRateGauge : MonoBehaviour {
 
 		float newXScale = barDisplay * initialXScale;
 	//	transform.localScale = new Vector3 (newXScale, newXScale, newXScale);
-		transform.localScale = Vector3.Lerp (transform.localScale, new Vector3 (newXScale, newXScale, newXScale), Time.deltaTime);
+		transform.localScale = Vector3.Lerp (transform.localScale, new Vector3 (newXScale, initialXScale, newXScale), Time.deltaTime);
 	}
 
 	public void AutoDestroy(){
