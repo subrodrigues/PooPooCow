@@ -30,7 +30,7 @@ public class ChickenSpawner : MonoBehaviour {
 				lastEnemy = Time.time;
 				spawnRate = 4.0f + (Random.value * 4.0f); 
 
-				float threshold = Random.value * 1.2f;
+				float threshold = Random.value * 0.6f;
 				float topSpawn = Random.value;
 				if(topSpawn >= 0.5f){
 					if (reverse){
