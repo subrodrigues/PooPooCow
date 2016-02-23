@@ -17,7 +17,7 @@ public class ChickenSpawner : MonoBehaviour {
 		target = go.transform;
 		
 		lastEnemy = 0.0f;
-		spawnRate = 2.0f + (Random.value * 5.0f); // In seconds
+		spawnRate = 5.0f + (Random.value * 3.0f); // In seconds
 	}
 	
 	// Update is called once per frame

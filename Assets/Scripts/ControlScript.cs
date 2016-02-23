@@ -130,15 +130,16 @@ public class ControlScript : MonoBehaviour {
 			// AndroidMovement ();
 			// KeyboardMovement (); 
 			
-			if(GetComponent<RectTransform>().localPosition.x < -15){
-					GetComponent<RectTransform>().localPosition = new Vector3(-15, GetComponent<RectTransform>().localPosition.y, GetComponent<RectTransform>().localPosition.z);
+			if(GetComponent<RectTransform>().localPosition.x < -15f){
+					GetComponent<RectTransform>().localPosition = new Vector3(-15f, GetComponent<RectTransform>().localPosition.y, GetComponent<RectTransform>().localPosition.z);
 			}
-			if(GetComponent<RectTransform>().localPosition.x > 15){
-					GetComponent<RectTransform>().localPosition = new Vector3(15, GetComponent<RectTransform>().localPosition.y, GetComponent<RectTransform>().localPosition.z);
+			if(GetComponent<RectTransform>().localPosition.x > 15f){
+					GetComponent<RectTransform>().localPosition = new Vector3(15f, GetComponent<RectTransform>().localPosition.y, GetComponent<RectTransform>().localPosition.z);
 			}
-			if(GetComponent<RectTransform>().localPosition.y > 369){
-					GetComponent<RectTransform>().localPosition = new Vector3(GetComponent<RectTransform>().localPosition.x, 369, GetComponent<RectTransform>().localPosition.z);
+			if(GetComponent<RectTransform>().localPosition.y > 9.4f){
+					GetComponent<RectTransform>().localPosition = new Vector3(GetComponent<RectTransform>().localPosition.x, 9.4f, GetComponent<RectTransform>().localPosition.z);
 			}
+
 			/*	if (plumpTime && Time.time > startJumpTime) {
 						plumpTime = false;
 						jumpTime = true;

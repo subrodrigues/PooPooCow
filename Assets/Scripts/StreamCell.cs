@@ -19,6 +19,9 @@ public class StreamCell : MonoBehaviour {
 		fallAnimation = false;
 		life = 1.0f;
 		decreaseSec = 0.2f;
+
+		transform.Rotate(new Vector3(0, 0, 180));
+		transform.localScale *= -1;
 	}
 	
 	// Update is called once per frame
@@ -32,7 +35,7 @@ public class StreamCell : MonoBehaviour {
 			// Start death animation
 			startPlayFall = Time.time + playFallTime;
 
-			Vector3 fallPos = new Vector3 (this.transform.position.x + 0.2f, this.transform.position.y - 0.2f, this.transform.position.z -0.8f);
+			Vector3 fallPos = new Vector3 (this.transform.position.x, this.transform.position.y, this.transform.position.z -0.25f);
 			this.transform.position = fallPos;
 		}
 		else if (fallAnimation) {
@@ -52,13 +55,15 @@ public class StreamCell : MonoBehaviour {
 		if (life >= 0.0f && life <= 0.5f && gameObject.GetComponent<SpriteRenderer> ().sprite == poo) {
 			effectiveLifeLossAtHalfLife -= decreasedLife;
 			float newScale = (effectiveLifeLossAtHalfLife * 0.2f);
-			transform.localScale = new Vector3 (newScale, newScale, newScale);
+			transform.localScale = new Vector3 (-newScale, -newScale, -newScale);
 		}
 	}
 
 	public void destroyThis(){
 		fallAnimation = true;
-		gameObject.GetComponent<SpriteRenderer>().color = new Color (1f, 1f, 1f, life + 0.75f);
+
+		if(gameObject.activeInHierarchy)
+			gameObject.GetComponent<SpriteRenderer>().color = new Color (1f, 1f, 1f, life + 0.75f);
 
 		if (life > 0.0f)
 		life = 0.0f;
