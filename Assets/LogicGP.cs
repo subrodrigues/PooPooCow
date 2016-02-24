@@ -5,7 +5,10 @@ public class LogicGP : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-         if(PlayerPrefs.HasKey("GPSignOut")){
+
+		Screen.sleepTimeout = SleepTimeout.NeverSleep;
+
+        if(PlayerPrefs.HasKey("GPSignOut")){
 		   // there is a saved option, auto-login or not
          	if(PlayerPrefs.GetInt("GPSignOut") == 0){ // Logged in
 				GPLeaderBoard.gpgInstance.GPGSignIn();
