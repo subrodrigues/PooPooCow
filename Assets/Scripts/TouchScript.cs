@@ -41,6 +41,8 @@ public class TouchScript : MonoBehaviour
 	public PooPooRateGauge pooPooRate;
 	public Sprite fullGauge, normalGauge, gauge2, gauge3, gauge4, gauge5, gauge6, gauge7, gauge8, gauge9;
 
+	private PauseButtonScript pauseButton;
+
 	void Awake ()
 	{
 		fart1Clip = Resources.Load ("fart1") as AudioClip;
@@ -75,6 +77,8 @@ public class TouchScript : MonoBehaviour
 	// Use this for initialization
 	void Start ()
 	{
+		pauseButton = GameObject.FindGameObjectWithTag("PauseButton").GetComponent<PauseButtonScript>();
+
 		for (int i = 0; i < cells.Length; i++) {
 			if (i == 0) {	// first round
 				cells [i].state = 1;
@@ -148,13 +152,9 @@ public class TouchScript : MonoBehaviour
 			RaycastHit hit;
 			Ray ray = mainCamera.ScreenPointToRay (Input.mousePosition);
 
-			//	Debug.Log ("TOUCHED " + ray.direction.x + " " + ray.direction.y + " " + ray.direction.z );
-
 			// Se toca no collider
-			if (touchCollider.GetComponent<Collider> ().Raycast (ray, out hit, Mathf.Infinity)) {
-				//	Debug.Log ("TOUCHED INSIDE" + hit.point.x + " " + hit.point.y + " " + hit.point.z);
+			if (!pauseButton.isButtonFocused && touchCollider.GetComponent<Collider> ().Raycast (ray, out hit, Mathf.Infinity)) {
 
-				//	Debug.Log ("HIT POINT " + hit.point.x);
 				// With 3d Camera
 				Vector3 target = new Vector3 (hit.point.x, hit.point.y, hit.point.z);
 
