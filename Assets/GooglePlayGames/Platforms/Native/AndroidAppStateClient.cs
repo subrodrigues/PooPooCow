@@ -52,14 +52,14 @@ internal class AndroidAppStateClient : AppStateClient {
     }
 
     public void LoadState(int slot, OnStateLoadedListener listener) {
-        GPLogger.d("LoadState, slot=" + slot);
+      //  GPLogger.d("LoadState, slot=" + slot);
         using (var apiClient = GetApiClient(mServices)) {
             CallAppState(apiClient, "load", new OnStateResultProxy(mServices, listener), slot);
         }
     }
 
     public void UpdateState(int slot, byte[] data, OnStateLoadedListener listener) {
-		GPLogger.d("UpdateState, slot=" + slot);
+	//	GPLogger.d("UpdateState, slot=" + slot);
         using (var apiClient = GetApiClient(mServices)) {
             AppStateManager.CallStatic("update", apiClient, slot, data);
         }

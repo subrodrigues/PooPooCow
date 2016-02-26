@@ -37,7 +37,7 @@ public class GPLeaderBoard : MonoBehaviour {
  
  public void ScoreToLeaderboard(long lscore, bool showLeaderBoard)
  {
-     Social.ReportScore (lscore, "CgkI2t-D5oEPEAIQAQ", (bool success)=>{
+		Social.ReportScore (lscore, "CgkI-47-7rAZEAIQAQ", (bool success)=>{
          if(success){
             if(showLeaderBoard){
                 PlayerPrefs.SetFloat("HiScore", lscore);
@@ -49,7 +49,7 @@ public class GPLeaderBoard : MonoBehaviour {
  
  public void ShowScoreLeaderboard()
  {
-     PlayGamesPlatform.Instance.ShowLeaderboardUI("CgkI2t-D5oEPEAIQAQ");
+		PlayGamesPlatform.Instance.ShowLeaderboardUI("CgkI-47-7rAZEAIQAQ");
  }
  
  public void GPGSignOut()
