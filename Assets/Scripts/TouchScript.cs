@@ -43,6 +43,14 @@ public class TouchScript : MonoBehaviour
 
 	private PauseButtonScript pauseButton;
 
+	// Drawing laser
+	private LineRenderer laserRenderer;
+	private Color c1 = Color.yellow;
+	private Color c2 = Color.red;
+	public GameObject pooPooShooterGameObject;
+	public Material laserRendererMaterial;
+	public GameObject laserTouchEnd;
+
 	void Awake ()
 	{
 		fart1Clip = Resources.Load ("fart1") as AudioClip;
@@ -92,6 +100,9 @@ public class TouchScript : MonoBehaviour
 		y = Screen.height / 800.0f; 
 		posGauge.x = 10;
 		posGauge.y = resolution.y - (resolution.y / 3.0f);
+
+		laserRenderer = pooPooShooterGameObject.AddComponent<LineRenderer>();
+		laserRenderer.material = laserRendererMaterial;
 	}
 
 	int incCells ()
@@ -134,6 +145,7 @@ public class TouchScript : MonoBehaviour
 		if (scoreUpdated) {
 			updateScore ();
 		}
+
 		if (Screen.width != resolution.x || Screen.height != resolution.y) {
 			resolution = new Vector2 (Screen.width, Screen.height);
 			x = resolution.x / 1280.0f;
@@ -146,7 +158,28 @@ public class TouchScript : MonoBehaviour
 			backgroundThemeSource.UnPause ();
 		}
 
-		if (Input.GetMouseButtonDown (0) && !ControlScript.GAME_OVER && Time.timeScale == 1.0f) {
+		if (Input.GetMouseButton (0) && !ControlScript.GAME_OVER && Time.timeScale == 1.0f) {
+
+			RaycastHit hit;
+			Ray ray = mainCamera.ScreenPointToRay (Input.mousePosition);
+
+			// Se toca no collider
+			if (!pauseButton.isButtonFocused && touchCollider.GetComponent<Collider> ().Raycast (ray, out hit, Mathf.Infinity)) {
+
+				// With 3d Camera
+				Vector3 target = new Vector3 (hit.point.x, hit.point.y, hit.point.z);
+				laserTouchEnd.transform.position = target;
+				laserTouchEnd.SetActive (true);
+
+				laserRenderer.SetVertexCount (2);
+			//	laserRenderer.SetColors (c1, c2); 
+				laserRenderer.SetPosition (0, pooShooter.transform.position); 
+				laserRenderer.SetPosition (1, target); 
+				laserRenderer.SetWidth (0.01F, 0.01F); 
+			}
+		}
+		else if (Input.GetMouseButtonUp (0) && !ControlScript.GAME_OVER && Time.timeScale == 1.0f) {
+			DisableLaser ();
 
 			if (ControlScript.START == false)
 				ControlScript.START = true;
@@ -163,7 +196,7 @@ public class TouchScript : MonoBehaviour
 
 				int index = incCells ();
 				if (index != -1 && !inflamedIntestines) {
-					if (!firstRound)
+					if (!firstRound && cells [index].touch != null)
 						cells [index].touch.destroyThis ();
 
 					if (firstRound && index == MAX_POO) {
@@ -324,4 +357,9 @@ public class TouchScript : MonoBehaviour
 		return Random.Range (0, 3);
 	}
 
+	private void DisableLaser()
+	{
+		laserRenderer.SetVertexCount(0);
+		laserTouchEnd.SetActive (false);
+	}
 }

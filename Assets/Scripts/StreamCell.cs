@@ -62,8 +62,8 @@ public class StreamCell : MonoBehaviour {
 	public void destroyThis(){
 		fallAnimation = true;
 
-		if(gameObject != null)
-			gameObject.GetComponent<SpriteRenderer>().color = new Color (1f, 1f, 1f, life + 0.75f);
+		if(this != null)
+			this.GetComponent<SpriteRenderer>().color = new Color (1f, 1f, 1f, life + 0.75f);
 
 		if (life > 0.0f)
 			life = 0.0f;
