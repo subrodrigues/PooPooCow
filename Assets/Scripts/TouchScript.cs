@@ -12,7 +12,7 @@ public class TouchScript : MonoBehaviour
 	public PooShooter pooShooter;
 	public Camera mainCamera;
 
-	static int MAX_POO = 3;
+	static int MAX_POO = 4;
 	// [0,MAX]
 
 	bool firstRound = true;
@@ -168,8 +168,11 @@ public class TouchScript : MonoBehaviour
 
 				// With 3d Camera
 				Vector3 target = new Vector3 (hit.point.x, hit.point.y, hit.point.z);
-				laserTouchEnd.transform.position = target;
-				laserTouchEnd.SetActive (true);
+
+				if (!inflamedIntestines) {
+					laserTouchEnd.transform.position = target;
+					laserTouchEnd.SetActive (true);
+				}
 
 				laserRenderer.SetVertexCount (2);
 			//	laserRenderer.SetColors (c1, c2); 
@@ -239,7 +242,7 @@ public class TouchScript : MonoBehaviour
 		if (!inflamedIntestines && currentRateTime >= 1.0f) { // removes 3 poo each second
 			currentRateTime = 0.0f;
 
-			pooRate -= 2; // incremented in update() TODO: change to 3 again
+			pooRate -= 3; // incremented in update() TODO: change to 3 again
 			if (pooRate < 0)
 				pooRate = 0;
 		}
