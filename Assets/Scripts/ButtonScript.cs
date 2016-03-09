@@ -3,7 +3,7 @@ using System.Collections;
 
 public class ButtonScript : MonoBehaviour {
 
-	public bool isExit, isPlayButton, isScoreButton;
+	public bool isExit, isPlayButton, isScoreButton, isAchievementsButton;
 	public Sprite button, buttonPressed;
 
 	void OnMouseEnter ()
@@ -29,6 +29,14 @@ public class ButtonScript : MonoBehaviour {
 		} else if (isScoreButton) {
 			if(GPLeaderBoard.gpgInstance.checkIfIsAuthenticated()){
 				GPLeaderBoard.gpgInstance.ShowScoreLeaderboard();
+			}
+			else{
+				GPLeaderBoard.gpgInstance.GPGSignIn();
+			}
+		}
+		else if (isAchievementsButton) {
+			if(GPLeaderBoard.gpgInstance.checkIfIsAuthenticated()){
+				GPLeaderBoard.gpgInstance.showAchievements();
 			}
 			else{
 				GPLeaderBoard.gpgInstance.GPGSignIn();

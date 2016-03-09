@@ -72,26 +72,7 @@ public class GPLeaderBoard : MonoBehaviour {
  }
 
  public void showAchievements () {
-	if(checkIfIsAuthenticated()){
-		Social.LoadAchievements (achievements => {
-			if (achievements.Length > 0) {
-				Debug.Log ("Got " + achievements.Length + " achievement instances");
-				string myAchievements = "My achievements:\n";
-				foreach (IAchievement achievement in achievements){
-					myAchievements += "\t" + 
-					achievement.id + " " +
-					achievement.percentCompleted + " " +
-					achievement.completed + " " +
-					achievement.lastReportedDate + "\n";
-				}
-				Debug.Log (myAchievements);
-			}
-			else
-				Debug.Log ("No achievements returned");
-		});
-	}
-	else
-		Debug.Log ("Failed to authenticate");
+	Social.ShowAchievementsUI ();
  }
 
 }
