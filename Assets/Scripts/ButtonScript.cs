@@ -28,7 +28,15 @@ public class ButtonScript : MonoBehaviour {
 			Application.LoadLevel ("level");
 		} else if (isScoreButton) {
 			if(GPLeaderBoard.gpgInstance.checkIfIsAuthenticated()){
-				GPLeaderBoard.gpgInstance.ShowScoreLeaderboard();
+
+				// If hi score submit failed last time, try to update now
+				long notSavedScore = (long) PlayerPrefs.GetFloat ("NotSavedHiScore");
+				if (notSavedScore != -1f){
+					GPLeaderBoard.gpgInstance.ScoreToLeaderboard (notSavedScore, true); // Update and show
+				}
+				else {
+					GPLeaderBoard.gpgInstance.ShowScoreLeaderboard();
+				}
 			}
 			else{
 				GPLeaderBoard.gpgInstance.GPGSignIn();
@@ -36,7 +44,7 @@ public class ButtonScript : MonoBehaviour {
 		}
 		else if (isAchievementsButton) {
 			if(GPLeaderBoard.gpgInstance.checkIfIsAuthenticated()){
-				GPLeaderBoard.gpgInstance.showAchievements();
+				GPLeaderBoard.gpgInstance.CheckIfServerIsSyncedAndShowAchievements();
 			}
 			else{
 				GPLeaderBoard.gpgInstance.GPGSignIn();

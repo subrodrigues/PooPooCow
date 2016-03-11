@@ -172,19 +172,20 @@ public class ControlScript : MonoBehaviour {
 				scoreButton.gameObject.SetActive(true);
 				playButton.gameObject.SetActive(true);
 
-				if(GPLeaderBoard.gpgInstance.checkIfIsAuthenticated()){
-					if(PlayerPrefs.HasKey("HiScore")){
-						float hiScore = PlayerPrefs.GetFloat("HiScore");
-			         	if(TouchScript.score >= hiScore){ 
-							GPLeaderBoard.gpgInstance.ScoreToLeaderboard(TouchScript.score, true);
-			         	}
-			         	else{
-			         		GPLeaderBoard.gpgInstance.ScoreToLeaderboard(TouchScript.score, false);
-			         	}
-					}else{
-						GPLeaderBoard.gpgInstance.ScoreToLeaderboard(TouchScript.score, true);
+				if (GPLeaderBoard.gpgInstance.checkIfIsAuthenticated ()) {
+					if (PlayerPrefs.HasKey ("HiScore")) {
+						float hiScore = PlayerPrefs.GetFloat ("HiScore");
+						if (TouchScript.score >= hiScore) { 
+							GPLeaderBoard.gpgInstance.ScoreToLeaderboard (TouchScript.score, true);
+						} else {
+							GPLeaderBoard.gpgInstance.ScoreToLeaderboard (TouchScript.score, false);
+						}
+					} else {
+						GPLeaderBoard.gpgInstance.ScoreToLeaderboard (TouchScript.score, true);
 					}
-					PlayerPrefs.SetInt("GPSignOut", 0);
+					PlayerPrefs.SetInt ("GPSignOut", 0);
+				} else {
+					PlayerPrefs.SetFloat ("NotSavedHiScore", TouchScript.score);
 				}
 			}
 		}

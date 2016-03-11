@@ -16,6 +16,13 @@ public class LogicGP : MonoBehaviour {
 		}else{
 			GPLeaderBoard.gpgInstance.GPGSignIn(); // No key, auto-login
 		}
+			
+		// If hi score submit failed last time, try to update now
+		if (GPLeaderBoard.gpgInstance.checkIfIsAuthenticated ()) { 
+			long notSavedScore = (long) PlayerPrefs.GetFloat ("NotSavedHiScore");
+			if(notSavedScore != -1f)
+				GPLeaderBoard.gpgInstance.ScoreToLeaderboard (notSavedScore, false);
+		}
 	}
 	
 	// Update is called once per frame
