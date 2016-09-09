@@ -24,7 +24,7 @@
 
 public static class GPGIds
 {
-        public const string leaderboard_poo_poo_board = "CgkI-47-7rAZEAIQAQ"; // <GPGSID>
+        public const string leaderboard_poo_poo_board = "CgkI-47-7rAZEAIQBw"; // <GPGSID>
         public const string achievement_addicted_to_feces = "CgkI-47-7rAZEAIQBA"; // <GPGSID>
         public const string achievement_junior_poo = "CgkI-47-7rAZEAIQAg"; // <GPGSID>
         public const string achievement_holy_crap = "CgkI-47-7rAZEAIQBg"; // <GPGSID>
