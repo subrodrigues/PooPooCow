@@ -3,18 +3,20 @@ using System.Collections;
 
 public class PauseButtonScript : MonoBehaviour {
 	public Sprite button, buttonPressed;
+	public Sprite playButton, playButtonPressed;
 	public bool gamePaused = false;
 	public bool isButtonFocused = false;
 
 	public void UnpauseGame(){
 		isButtonFocused = false;
 
-		gameObject.GetComponent<SpriteRenderer>().sprite = button;
-
 		if(gamePaused){
+			
+			gameObject.GetComponent<SpriteRenderer>().sprite = button;
 			Time.timeScale = 1.0f;
 		}
 		else{
+			gameObject.GetComponent<SpriteRenderer>().sprite = playButton;
 			Time.timeScale = 0.0f;
 		}
 		gamePaused = !gamePaused;
@@ -28,7 +30,11 @@ public class PauseButtonScript : MonoBehaviour {
 	{
 		isButtonFocused = true;
 
-		gameObject.GetComponent<SpriteRenderer>().sprite = buttonPressed;
+		if(gamePaused)
+			gameObject.GetComponent<SpriteRenderer>().sprite = playButtonPressed;
+		else
+			gameObject.GetComponent<SpriteRenderer>().sprite = buttonPressed;
+		
 	}
 	void OnMouseExit ()
 	{
