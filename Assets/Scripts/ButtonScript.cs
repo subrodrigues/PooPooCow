@@ -5,6 +5,11 @@ public class ButtonScript : MonoBehaviour {
 
 	public bool isExit, isPlayButton, isScoreButton, isAchievementsButton;
 	public Sprite button, buttonPressed;
+	private PauseButtonScript pauseButton;
+
+	void Start(){
+		pauseButton = GameObject.FindGameObjectWithTag("PauseButton").GetComponent<PauseButtonScript>();
+	}
 
 	void OnMouseEnter ()
 	{
@@ -25,8 +30,16 @@ public class ButtonScript : MonoBehaviour {
 		if (isExit) {
 			Application.Quit ();
 		} else if (isPlayButton) {
+			if (pauseButton != null && pauseButton.gamePaused) {
+				pauseButton.UnpauseGame ();
+			}
+
 			Application.LoadLevel ("level");
 		} else if (isScoreButton) {
+			if (pauseButton != null && pauseButton.gamePaused) {
+				pauseButton.UnpauseGame ();
+			}
+
 			if(GPLeaderBoard.gpgInstance.checkIfIsAuthenticated()){
 
 				// If hi score submit failed last time, try to update now
@@ -43,6 +56,10 @@ public class ButtonScript : MonoBehaviour {
 			}
 		}
 		else if (isAchievementsButton) {
+			if (pauseButton != null && pauseButton.gamePaused) {
+				pauseButton.UnpauseGame ();
+			}
+
 			if(GPLeaderBoard.gpgInstance.checkIfIsAuthenticated()){
 				GPLeaderBoard.gpgInstance.CheckIfServerIsSyncedAndShowAchievements();
 			}

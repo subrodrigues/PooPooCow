@@ -126,6 +126,11 @@ public class TouchScript : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
 	{
+
+		if (Input.GetKey("escape") && pauseButton.gamePaused){
+			pauseButton.UnpauseGame ();
+		}
+	
 		if (ControlScript.GAME_OVER && scoreGUI.enabled) {
 			backgroundThemeSource.Stop ();
 			scoreGUI.enabled = false;

@@ -6,6 +6,20 @@ public class PauseButtonScript : MonoBehaviour {
 	public bool gamePaused = false;
 	public bool isButtonFocused = false;
 
+	public void UnpauseGame(){
+		isButtonFocused = false;
+
+		gameObject.GetComponent<SpriteRenderer>().sprite = button;
+
+		if(gamePaused){
+			Time.timeScale = 1.0f;
+		}
+		else{
+			Time.timeScale = 0.0f;
+		}
+		gamePaused = !gamePaused;
+	}
+
 	void OnMouseEnter ()
 	{
 		isButtonFocused = true;
@@ -22,16 +36,6 @@ public class PauseButtonScript : MonoBehaviour {
 	}	
 	void OnMouseUp ()
 	{
-		isButtonFocused = false;
-
-		gameObject.GetComponent<SpriteRenderer>().sprite = button;
-
-		if(gamePaused){
-			Time.timeScale = 1.0f;
-		}
-		else{
-			Time.timeScale = 0.0f;
-		}
-		gamePaused = !gamePaused;
+		UnpauseGame ();
 	}
 }
