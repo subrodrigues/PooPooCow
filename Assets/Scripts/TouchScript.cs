@@ -162,6 +162,9 @@ public class TouchScript : MonoBehaviour
 		if (!ControlScript.GAME_OVER && !pauseButton.isButtonFocused && !pauseButton.gamePaused && !backgroundThemeSource.isPlaying) {
 			backgroundThemeSource.UnPause ();
 		}
+		else if ((pauseButton.isButtonFocused || pauseButton.gamePaused) && backgroundThemeSource.isPlaying) {
+			backgroundThemeSource.Pause ();
+		}
 
 		if (Input.GetMouseButton (0) && !ControlScript.GAME_OVER && Time.timeScale == 1.0f) {
 
@@ -225,8 +228,6 @@ public class TouchScript : MonoBehaviour
 						giggleSource.Play ();
 					}
 				}
-			} else if (pauseButton.isButtonFocused && backgroundThemeSource.isPlaying) {
-				backgroundThemeSource.Pause ();
 			}
 		}
 
