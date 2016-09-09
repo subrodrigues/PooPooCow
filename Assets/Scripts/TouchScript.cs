@@ -61,13 +61,13 @@ public class TouchScript : MonoBehaviour
 		backgroundThemeClip = Resources.Load ("poo_poo_background") as AudioClip;
 		gameOverClip = Resources.Load ("game_over") as AudioClip;
 
-		fart1Source = AddAudio (fart1Clip, false, false, 0.3f);
-		fart2Source = AddAudio (fart2Clip, false, false, 0.3f);
-		fart3Source = AddAudio (fart3Clip, false, false, 0.3f);
-		giggleSource = AddAudio (giggleClip, false, false, 0.4f);
+		fart1Source = AddAudio (fart1Clip, false, false, 0.7f);
+		fart2Source = AddAudio (fart2Clip, false, false, 0.7f);
+		fart3Source = AddAudio (fart3Clip, false, false, 0.7f);
+		giggleSource = AddAudio (giggleClip, false, false, 0.8f);
 		coinCollectSource = AddAudio (coinCollect, false, false, 0.8f);
-		backgroundThemeSource = AddAudio (backgroundThemeClip, true, true, 0.05f);
-		gameOverSource = AddAudio (gameOverClip, false, true, 0.1f);
+		backgroundThemeSource = AddAudio (backgroundThemeClip, true, true, 0.3f);
+		gameOverSource = AddAudio (gameOverClip, false, true, 0.5f);
 
 		backgroundThemeSource.Play ();
 
