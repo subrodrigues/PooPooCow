@@ -3,6 +3,7 @@ using System.Collections;
 
 public class ButtonScript : MonoBehaviour {
 
+	public bool isButtonContextMainMenu = false;
 	public bool isExit, isPlayButton, isScoreButton, isAchievementsButton;
 	public Sprite button, buttonPressed;
 	private PauseButtonScript pauseButton;
@@ -34,7 +35,11 @@ public class ButtonScript : MonoBehaviour {
 				pauseButton.UnpauseGame ();
 			}
 
-			Application.LoadLevel ("level");
+			if (isButtonContextMainMenu)
+				Application.LoadLevel ("levelLoading");
+			else
+				Application.LoadLevel ("level");
+			
 		} else if (isScoreButton) {
 			if (pauseButton != null && pauseButton.gamePaused) {
 				pauseButton.UnpauseGame ();
