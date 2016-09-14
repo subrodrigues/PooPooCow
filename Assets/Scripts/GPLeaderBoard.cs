@@ -6,7 +6,7 @@ using UnityEngine.SocialPlatforms;
 public class GPLeaderBoard : MonoBehaviour
 {
 	static int RANKED_MANURE = 10, JUNIOR_POO = 25, ADDICTED_TO_FECES = 50, THE_POOMINATOR = 100, HOLY_CRAP = 200;
-	// static int RANKED_MANURE = 1, JUNIOR_POO = 2, ADDICTED_TO_FECES = 3, THE_POOMINATOR = 4, HOLY_CRAP = 5;
+//	static int RANKED_MANURE = 1, JUNIOR_POO = 2, ADDICTED_TO_FECES = 3, THE_POOMINATOR = 4, HOLY_CRAP = 5;
 	const string RANKED_MANURE_ID = "CgkI-47-7rAZEAIQAw";
 	const string JUNIOR_POO_ID = "CgkI-47-7rAZEAIQAg";
 	const string ADDICTED_TO_FECES_ID = "CgkI-47-7rAZEAIQBA";
@@ -54,8 +54,9 @@ public class GPLeaderBoard : MonoBehaviour
 					ShowScoreLeaderboard ();
 					PlayerPrefs.SetFloat ("HiScore", lscore);
 					PlayerPrefs.SetFloat ("NotSavedHiScore", -1f);
-					UnlockAchievements (lscore);
 				}
+
+				UnlockAchievements (lscore);
 			}
 			else{
 				PlayerPrefs.SetFloat ("NotSavedHiScore", lscore);
